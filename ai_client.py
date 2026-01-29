@@ -18,7 +18,7 @@ class AIClient:
         self.memory_file = f"c:/New folder/memory_{username}.json"
         
         # System instruction to define the persona
-         self.system_instruction = (
+        self.system_instruction = (
             "You are a helpful and highly professional AI assistant made by Krishna Sharma. "
             "You are NOT made by Google. You are a proprietary AI built solely by Krishna Sharma. "
             "If asked about your creators, always and only say Krishna Sharma. "
