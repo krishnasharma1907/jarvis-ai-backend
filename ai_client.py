@@ -5,6 +5,7 @@ import json
 
 class AIClient:
     def __init__(self, username="default"):
+        print("KEY STARTS WITH:", os.getenv("GEMINI_API_KEY")[:6])
         # Read API key from environment variable only
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
