@@ -5,7 +5,7 @@ import os
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = 'os.getenv("SECRET_KEY")  # Verify: Change this in production
+app.secret_key = os.getenv("SECRET_KEY")  # Verify: Change this in production
 USERS_FILE = 'c:/New folder/users.json'
 
 # --- Helpers ---
