@@ -8,6 +8,7 @@ class AIClient:
         print("KEY STARTS WITH:", os.getenv("GEMINI_API_KEY")[:6])
         # Read API key from environment variable only
         api_key = os.getenv("GEMINI_API_KEY")
+        print("API KEY VALUE:", api_key)
         if not api_key:
             raise ValueError("GEMINI_API_KEY not found. Add it in Render Environment Variables.")
         
