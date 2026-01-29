@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - {{ username }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container chat-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h1>Hi, {{ username }}</h1>
+            <a href="/logout" style="margin: 0; color: #f43f5e;">Logout</a>
+        </div>
+        
+        <div class="chat-box" id="chat-box">
+            <div class="message ai-msg">
+                Hello! I am your AI assistant made by Krishna Sharma. How can I help you today?
+            </div>
+        </div>
+
+        <div class="typing-area">
+            <input type="text" id="message-input" placeholder="Type a message..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function addMessage(text, className) {
+            const chatBox = document.getElementById('chat-box');
+            const div = document.createElement('div');
+            div.className = `message ${className}`;
+            div.textContent = text;
+            chatBox.appendChild(div);
+            scrollToBottom();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('message-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Add user message immediately
+            addMessage(text, 'user-msg');
+            input.value = '';
+
+            // Loading state could be added here
+            
+            // Send to backend
+            const result = await apiRequest('/api/chat', { message: text });
+            
+            // Add AI response
+            if (result.response) {
+                addMessage(result.response, 'ai-msg');
+            }
+        }
+    </script>
+</body>
+</html>

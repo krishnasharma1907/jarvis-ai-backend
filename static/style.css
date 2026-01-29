@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+    --primary: #6366f1;
+    --accent: #8b5cf6;
+    --dark-bg: #0f172a;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text: #f8fafc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Dynamic Background */
+body::before,
+body::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+    animation: float 10s infinite alternate;
+}
+
+body::before {
+    background: var(--primary);
+    top: -50px;
+    left: -50px;
+}
+
+body::after {
+    background: var(--accent);
+    bottom: -50px;
+    right: -50px;
+    animation-delay: 5s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(30px, 30px);
+    }
+}
+
+/* Glassmorphism Container */
+.container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    width: 400px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    background: linear-gradient(to right, #a78bfa, #2dd4bf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: scale(1);
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: white;
+}
+
+/* Chat Specific */
+.chat-container {
+    width: 800px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    line-height: 1.5;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.user-msg {
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+.ai-msg {
+    background: rgba(255, 255, 255, 0.1);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.typing-area {
+    display: flex;
+    gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.typing-area input {
+    margin: 0;
+}
+
+.typing-area button {
+    margin: 0;
+    width: auto;
+    padding: 0 25px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
